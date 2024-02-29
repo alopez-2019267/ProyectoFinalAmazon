@@ -1,7 +1,7 @@
 'use strict'
 
 import User from './user.model.js'
-import { encrypt, checkPassword, checkUpdateCliente } from '../utils/validator.js'
+import { encrypt, checkPassword, checkUpdate } from '../utils/validator.js'
 import { generateJwt } from '../utils/jwt.js'
 
 export const test = (req, res) =>{
@@ -53,13 +53,13 @@ export const login = async(req, res) =>{
         return res.status(500).send({message: 'Error to login'})
     }
 }
-
+/*
 export const updateCliente = async(req, res) => {
     try{
         let { id } = req.params
         let data = req.body
         data.password = await encrypt(data.password)
-        let update = checkUpdateCliente(data, id)
+        let update = checkUpdate(data, id)
         if(!update) return res.status(400).send({message: `Have submitted some data that cannot be updated`})
         let updatedUser = await User.findOneAndUpdate(
             //va a buscar un solo registro
@@ -73,8 +73,35 @@ export const updateCliente = async(req, res) => {
         return res.send({message: `Update user`, updatedUser})
     }catch(err){
         console.error(err)
-        if(err.keyValue.username)return res.status(400).send({message: `Username ${err.keyValue.username} is alredy exists`})
+        if(err.keyValue.username)return res.status(400).send({message: `Username ${err.keyValue.username} is already exists`})
         return res.status(500).send({message: `Error updating account`})
     }
+}*/
+
+export const updateCliente = async(req, res)=>{ //Datos generales (No password)
+    try {
+        //Obtener el id del usuario a actualizar
+        let { id } = req.params
+        //Obtener los datos a actualizar
+        let data = req.body
+        //Validar si data trae datos
+        let update = checkUpdate(data, id)
+        if(!update) return res.status(400).send({message: 'Have submitted some data that cannot be updated'})
+        //Validar si tiene permisos (tekenizacion) X Por hoy no lo vemos X
+        //Actualizar (DB)
+        let updatedUser = await User.findOneAndUpdate(
+            {_id: id}, // ObjectsId <- hexadecimales (Hora sys, version Mongo, Llave privada...)
+            data //Los datos que se van a actualizar 
+        )
+        //Validar la actualizacion
+        if (!updatedUser)return res.status(401).send({message: 'User not found and not updated'})
+        return res.send({message: 'Update User', updatedUser})
+        //Respondo al usuario
+    } catch (err) {
+        console.error(err)
+        if(err.keyValue.username) return res.status(400).send({message: `Username ${err.keyValue.username} is already taken`})
+        return res.satatus(500).send({message: 'error updating acount'})
+    }
 }
+
 

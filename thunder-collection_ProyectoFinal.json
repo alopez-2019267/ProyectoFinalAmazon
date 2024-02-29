@@ -1,0 +1,402 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "ProyectoFinal",
+    "dateExported": "2024-02-28T23:11:41.774Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "fc0e23eb-b3d0-4a8a-8fc0-6d5b2d5778d9",
+            "name": "Category",
+            "containerId": "",
+            "created": "2024-02-28T00:45:07.711Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "d45d772e-c78f-4ac0-9ca9-cabb02df66fc",
+            "name": "Product",
+            "containerId": "",
+            "created": "2024-02-28T04:06:27.724Z",
+            "sortNum": 20000
+        },
+        {
+            "_id": "df74fede-9f8a-49d7-9efe-5bca924b5a74",
+            "name": "User",
+            "containerId": "",
+            "created": "2024-02-28T22:57:47.490Z",
+            "sortNum": 30000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "0f551cb9-0e5f-4e48-888e-958c5cc0af21",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "fc0e23eb-b3d0-4a8a-8fc0-6d5b2d5778d9",
+            "name": "test",
+            "url": "/category/test",
+            "method": "GET",
+            "sortNum": 10000,
+            "created": "2024-02-28T00:45:14.879Z",
+            "modified": "2024-02-28T00:45:53.334Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b1518843-286c-4f0b-beec-74cfdf974bbb",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "fc0e23eb-b3d0-4a8a-8fc0-6d5b2d5778d9",
+            "name": "Crear Categoria",
+            "url": "/category/saveCategory",
+            "method": "POST",
+            "sortNum": 20000,
+            "created": "2024-02-28T00:47:39.335Z",
+            "modified": "2024-02-28T04:06:14.914Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Comida"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Pollo, queso, etc"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "9a61399f-4214-4aff-9bbc-237fdd730631",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "fc0e23eb-b3d0-4a8a-8fc0-6d5b2d5778d9",
+            "name": "Listar Categoria",
+            "url": "/category/listCategories",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2024-02-28T01:22:09.880Z",
+            "modified": "2024-02-28T01:22:18.473Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "79a555c5-42da-4449-b405-546da5f4e3d0",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "fc0e23eb-b3d0-4a8a-8fc0-6d5b2d5778d9",
+            "name": "Eliminar Categoria",
+            "url": "/category/deleteCategory/65de8502a72dec6a911e9a09",
+            "method": "DELETE",
+            "sortNum": 50000,
+            "created": "2024-02-28T04:04:47.209Z",
+            "modified": "2024-02-28T04:05:38.151Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "cf5f4c27-da82-4e49-bdb7-5a20012feb20",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "fc0e23eb-b3d0-4a8a-8fc0-6d5b2d5778d9",
+            "name": "Actualizar categoria",
+            "url": "/category/updateCategory/65de8ad55d77264360c73fdd",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2024-02-28T01:26:02.568Z",
+            "modified": "2024-02-28T01:26:51.269Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "description",
+                        "value": "Seda, tela, etc"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "ed955b3e-b963-4a61-9cd9-7b205d85199d",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "d45d772e-c78f-4ac0-9ca9-cabb02df66fc",
+            "name": "test",
+            "url": "/product/test",
+            "method": "GET",
+            "sortNum": 60000,
+            "created": "2024-02-28T04:07:56.939Z",
+            "modified": "2024-02-28T04:08:09.982Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "5cd3aa6e-3b94-4b2d-ae60-723bf3be0e11",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "d45d772e-c78f-4ac0-9ca9-cabb02df66fc",
+            "name": "Crear Producto",
+            "url": "/product/saveProduct",
+            "method": "POST",
+            "sortNum": 70000,
+            "created": "2024-02-28T04:08:20.996Z",
+            "modified": "2024-02-28T04:09:39.982Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Pollo"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Mexicano"
+                    },
+                    {
+                        "name": "stock",
+                        "value": "15"
+                    },
+                    {
+                        "name": "price",
+                        "value": "120"
+                    },
+                    {
+                        "name": "categoria",
+                        "value": "65deb1368e972fbb4dad46c7"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "09384c15-7cfd-43f5-a3a3-d401fcc34a5f",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "d45d772e-c78f-4ac0-9ca9-cabb02df66fc",
+            "name": "Listar Productos",
+            "url": "/product/listProducts",
+            "method": "GET",
+            "sortNum": 80000,
+            "created": "2024-02-28T04:18:44.111Z",
+            "modified": "2024-02-28T04:19:00.417Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "b7a041b5-3a3c-4ef3-bf52-eb3c6dd07e1f",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "d45d772e-c78f-4ac0-9ca9-cabb02df66fc",
+            "name": "Actualizar Producto",
+            "url": "/product/updateProduct/65deb362e84673169ea78967",
+            "method": "PUT",
+            "sortNum": 90000,
+            "created": "2024-02-28T04:52:51.317Z",
+            "modified": "2024-02-28T04:54:51.437Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Pantalon"
+                    },
+                    {
+                        "name": "description",
+                        "value": "Tela de seda"
+                    },
+                    {
+                        "name": "stock",
+                        "value": "20"
+                    },
+                    {
+                        "name": "price",
+                        "value": "200"
+                    },
+                    {
+                        "name": "categoria",
+                        "value": "65de8ad55d77264360c73fdd"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "4b086bb9-ed40-4c12-856f-b32cda7ee40e",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "d45d772e-c78f-4ac0-9ca9-cabb02df66fc",
+            "name": "Eliminar Producto",
+            "url": "/product/deleteProduct/65deb362e84673169ea78967",
+            "method": "DELETE",
+            "sortNum": 100000,
+            "created": "2024-02-28T05:28:20.748Z",
+            "modified": "2024-02-28T05:29:18.929Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "677505b5-0634-4a8d-9a99-4a3ebc172fdb",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "df74fede-9f8a-49d7-9efe-5bca924b5a74",
+            "name": "test",
+            "url": "/user/test",
+            "method": "GET",
+            "sortNum": 110000,
+            "created": "2024-02-28T22:57:53.897Z",
+            "modified": "2024-02-28T22:58:25.592Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "a2e39002-c252-4af0-bd36-11f8920bf342",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "df74fede-9f8a-49d7-9efe-5bca924b5a74",
+            "name": "Register Cliente",
+            "url": "/user/registerCliente",
+            "method": "POST",
+            "sortNum": 120000,
+            "created": "2024-02-28T22:59:16.915Z",
+            "modified": "2024-02-28T23:02:03.225Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Antony"
+                    },
+                    {
+                        "name": "surname",
+                        "value": "Doren"
+                    },
+                    {
+                        "name": "username",
+                        "value": "adoren"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    },
+                    {
+                        "name": "email",
+                        "value": "adoren@gmail.com"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "12345678"
+                    },
+                    {
+                        "name": "role",
+                        "value": "dadad"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "c7ace1ee-9191-4043-ba93-5555cf3d4d12",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "df74fede-9f8a-49d7-9efe-5bca924b5a74",
+            "name": "Login",
+            "url": "/user/login",
+            "method": "POST",
+            "sortNum": 140000,
+            "created": "2024-02-28T23:02:34.532Z",
+            "modified": "2024-02-28T23:03:12.380Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "username",
+                        "value": "adoren"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345678"
+                    }
+                ]
+            },
+            "tests": []
+        },
+        {
+            "_id": "795949bd-875c-4016-b8b6-abc53daa64cf",
+            "colId": "03d51f70-7670-4ebc-b7bc-42de7503f7bf",
+            "containerId": "df74fede-9f8a-49d7-9efe-5bca924b5a74",
+            "name": "Actualizar su perfil",
+            "url": "/user/updateCliente/65dfbb6b24ab59dab125970e",
+            "method": "PUT",
+            "sortNum": 150000,
+            "created": "2024-02-28T23:03:38.236Z",
+            "modified": "2024-02-28T23:11:25.425Z",
+            "headers": [
+                {
+                    "name": "token",
+                    "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NWRmYmI2YjI0YWI1OWRhYjEyNTk3MGUiLCJ1c2VybmFtZSI6ImFkb3JlbiIsIm5hbWUiOiJBbnRvbnkiLCJyb2xlIjoiQ0xJRU5URSIsImlhdCI6MTcwOTE2MTcxMiwiZXhwIjoxNzA5MTcyNTEyfQ.T8oiv0fjFEU5QJNdb3hHGffalaolzlcaBk8252smSFE"
+                }
+            ],
+            "params": [],
+            "body": {
+                "type": "formencoded",
+                "raw": "",
+                "form": [
+                    {
+                        "name": "name",
+                        "value": "Pedro"
+                    },
+                    {
+                        "name": "surname",
+                        "value": "Ramirez"
+                    },
+                    {
+                        "name": "username",
+                        "value": "pramirez"
+                    },
+                    {
+                        "name": "password",
+                        "value": "12345677",
+                        "isDisabled": true
+                    },
+                    {
+                        "name": "email",
+                        "value": "pramirez@gmail.com"
+                    },
+                    {
+                        "name": "phone",
+                        "value": "12345677"
+                    },
+                    {
+                        "name": "role",
+                        "value": "fasfasf",
+                        "isDisabled": true
+                    }
+                ]
+            },
+            "tests": []
+        }
+    ],
+    "settings": {
+        "options": {
+            "baseUrl": "localhost:2656"
+        }
+    }
+}
