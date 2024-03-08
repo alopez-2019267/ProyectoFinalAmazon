@@ -20,18 +20,6 @@ export const checkPassword = async(password, hash) => {
     }
 }
 
-export const checkUpdateCliente = (data, userId)=>{
-    if (userId){
-        //validamos si data esta vacío   o 
-        if(Object.entries(data).length === 0  
-        || data.role 
-        || data.role == ''){
-            return false
-        }
-        return true
-    }
-}
-
 export const checkUpdate = (data, userId)=>{
     if (userId){
         //validamos si data esta vacío   o 
@@ -43,13 +31,34 @@ export const checkUpdate = (data, userId)=>{
             return false
         }
         return true
-    }/*else{
+    }
+}
+
+export const checkUpdateAdminClient = (data, userId)=>{
+    if (userId){
+        //validamos si data esta vacío   o 
         if(Object.entries(data).length === 0  
-        || data.keeper 
-        || data.keeper == '' ){
+        || data.password 
+        || data.password == ''){
             return false
         }
         return true
-    }*/
+    }
 }
+
+export const checkUpdateCliente = (data, userId)=>{
+    if (userId){
+        //validamos si data esta vacío   o 
+        if(Object.entries(data).length === 0  
+        || data.role 
+        || data.role == ''
+        || data.password 
+        || data.password == ''){
+            return false
+        }
+        return true
+    }
+}
+
+
 
