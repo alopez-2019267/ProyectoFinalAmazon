@@ -46,7 +46,7 @@ export const registerCliente = async(req, res) =>{
                 {email: data.email}
             ]
         })
-        if(findUsername) return res.status(403).send({message: `El usuario ${data.username} ya existe o el email ${data.email}`})
+        if(findUsername) return res.status(403).send({message: `El usuario ${data.username} ya existe o email ${data.email}`})
         data.role = 'CLIENTE'
         let user = new User(data)
         // Falta validar que compruebe si el usuario ya esta en uso
@@ -121,7 +121,7 @@ export const updateAdmin = async(req, res) => {
         let secretKey = process.env.SECRET_KEY
         let token = req.headers.authorization
         const {uid} = jwt.verify(token, secretKey)
-        if(uid != id) return res.status(404).send({message: 'You can not edit another client '})
+        if(uid != id) return res.status(404).send({message: 'You can not edit another Admin '})
         //Actualizar la db
         let updatedUser = await User.findOneAndUpdate(
             //va a buscar un solo registro
@@ -149,17 +149,17 @@ export const updateClientAdmin = async(req, res) => {
         
         // Validar que data no esté vacío
         let update = checkUpdateAdminClient(data, id);
-        if (!update) return res.status(400).send({ message: `Have submitted some data that cannot be updated` });
+        if (!update) return res.status(400).send({ message: `Have submitted some data that cannot be updated` })
 
         // Validar si el usuario tiene permisos (tokenización)
         // (Por ahora no implementado)
 
         // Verificar si el usuario tiene el rol ADMINISTRADOR
         const user = await User.findById(id);
-        if (!user) return res.status(404).send({ message: 'User not found' });
+        if (!user) return res.status(404).send({ message: 'User not found' })
 
         if (user.role === 'ADMINISTRADOR') {
-            return res.status(403).send({ message: 'You are not authorized to update users with role ADMINISTRADOR' });
+            return res.status(403).send({ message: 'You are not authorized to update users with role ADMINISTRADOR' })
         }
 
         // Actualizar la base de datos
@@ -167,19 +167,19 @@ export const updateClientAdmin = async(req, res) => {
             { _id: id },
             data,
             { new: true }
-        );
+        )
 
         // Validar la actualización
-        if (!updatedUser) return res.status(401).send({ message: 'User not found and not updated' });
+        if (!updatedUser) return res.status(401).send({ message: 'User not found and not updated' })
 
         // Responder al usuario
         return res.send({ message: `Update user`, updatedUser });
     } catch (err) {
         console.error(err);
         if (err.keyValue && err.keyValue.username) {
-            return res.status(400).send({ message: `Username ${err.keyValue.username} already exists` });
+            return res.status(400).send({ message: `Username ${err.keyValue.username} already exists` })
         }
-        return res.status(500).send({ message: `Error updating account` });
+        return res.status(500).send({ message: `Error updating account` })
     }
 }
 
@@ -187,13 +187,21 @@ export const deleteAdmin = async(req, res) => {
     try{
         //Obtener el Id
         let { id } = req.params
+        let { password } = req.body
         //validar si esta logeado y es el mismo
         let secretKey = process.env.SECRET_KEY
         let token = req.headers.authorization
         const {uid} = jwt.verify(token, secretKey)
         if(uid != id) return res.status(404).send({message: 'You can not delete another admin '})
+        const admimId = await User.findOne({_id: id})
+        if(!admimId) return res.status(404).send({message: 'Admin not found'})
         //Actualizar la db
         //Eliminamos (deleteOne(solo elimina), findeOneAndDelete(me devuelve el documento eliminado))
+        const verifyPassword = await bcrypt.compare(password, admimId.password);
+        //console.log(verifyPassword);
+            if (verifyPassword === false) {
+                return res.status(401).send({ message: 'The password is incorrect' });
+            }
         let deletedUser = await User.findOneAndDelete({_id: id})
         //Verificamos que se elimino
         if(!deletedUser) return res.status(404).send({message: 'Account not found and not delete'})
@@ -209,12 +217,20 @@ export const deleteClientAdmin = async(req, res) => {
     try{
         //Obtener el Id
         let { id } = req.params
+        let { password } = req.body
         const user = await User.findById(id);
         if (!user) return res.status(404).send({ message: 'User not found' });
 
         if (user.role === 'ADMINISTRADOR') {
             return res.status(403).send({ message: 'You are not authorized to update users with role ADMINISTRADOR' });
         }
+        const clientId = await User.findOne({_id: id})
+        if(!clientId) return res.status(404).send({message: 'Admin not found'})
+        const verifyPassword = await bcrypt.compare(password, clientId.password);
+        //console.log(verifyPassword);
+            if (verifyPassword === false) {
+                return res.status(401).send({ message: 'The password is incorrect' });
+            }
         //Eliminamos (deleteOne(solo elimina), findeOneAndDelete(me devuelve el documento eliminado))
         let deletedUser = await User.findOneAndDelete({_id: id})
         //Verificamos que se elimino

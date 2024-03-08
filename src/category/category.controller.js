@@ -146,6 +146,7 @@ export const productsByCategory = async(req, res) => {
         if(!category || category.length === 0) return res.status(401).send({message: 'Category not found'})
         let categoryId = category._id
         let product = await Product.find({categoria: categoryId})
+        if(!product || product.length === 0) return res.status(401).send({message: 'No one product found'})
         return res.send({product})
     } catch(err) {
         console.error(err);

@@ -35,29 +35,29 @@ export const saveProduct = async(req, res)=>{
 
 export const searchProductById = async (req, res) => {
     try {
-        let { search } = req.body;
+        let { search } = req.body
         
         let product = await Product.find({_id: search})
         if(!product) return res.status(404).send({message: 'Product not found'})
 
-        return res.send({ message: 'Product found', product });
+        return res.send({ message: 'Product found', product })
     } catch (error) {
-        console.error(error);
-        return res.status(500).send({ message: 'Error getting product' });
+        console.error(error)
+        return res.status(500).send({ message: 'Error getting product' })
     }
 }
 
 export const listProducts = async(req, res) => {
     try {
-        let products = await Product.find().populate(['name', 'description', 'stock', 'price', 'categoria']);
+        let products = await Product.find().populate(['name', 'description', 'stock', 'price', 'categoria'])
 
         if (!products || products.length === 0) {
-            return res.status(404).send({ message: 'No products found' });
+            return res.status(404).send({ message: 'No products found' })
         }
-        return res.send({ message: 'Products found', products });
+        return res.send({ message: 'Products found', products })
     } catch(err) {
-        console.error(err);
-        return res.status(500).send({ message: 'Error listing products' });
+        console.error(err)
+        return res.status(500).send({ message: 'Error listing products' })
     }
 }
 
@@ -91,10 +91,10 @@ export const updateProduct = async(req, res)=>{
 export const controlInventory = async (req, res) => {
     try {
         // Calcular la cantidad total de productos en stock
-        const totalProducts = await Product.countDocuments();
+        const totalProducts = await Product.countDocuments()
         
         // Calcular la cantidad total de productos agotados
-        const soldOutProductsCount = await Product.countDocuments({ stock: 0 });
+        const soldOutProductsCount = await Product.countDocuments({ stock: 0 })
         
         // Calcular la cantidad total de productos no agotados
         const availableProductsCount = totalProducts - soldOutProductsCount;
@@ -105,17 +105,21 @@ export const controlInventory = async (req, res) => {
             { $group: { _id: null, totalAmount: { $sum: "$amount" } } } // Sumar las cantidades de productos en todos los carritos
         ]);
 
-        const totalPurchasedProducts = purchasedProductsCount.length > 0 ? purchasedProductsCount[0].totalAmount : 0;
+        const totalPurchasedProducts = purchasedProductsCount.length > 0 ? purchasedProductsCount[0].totalAmount : 0
+
+        // Obtener detalles de los productos agotados
+        const soldOutProducts = await Product.find({ stock: 0 })
 
         // Responder con los resultados
-        return res.json({
+        return res.send({
             totalProducts,
             soldOutProductsCount,
             availableProductsCount,
-            totalPurchasedProducts
+            totalPurchasedProducts,
+            soldOutProducts
         });
     } catch (error) {
-        console.error(error);
+        console.error(error)
 
         // Manejar errores específicos
         if (error.name === 'MongoError') {
@@ -125,7 +129,6 @@ export const controlInventory = async (req, res) => {
         return res.status(500).send({ message: 'Inventory control error' })
     }
 }
-
 
 export const findSoldOut = async (req, res) => {
     try {
@@ -224,15 +227,19 @@ export const getMostSoldProducts = async (req, res) => {
 
 export const searchProductByName = async (req, res) => {
     try {
-        let { search } = req.body;
-        
-        let product = await Product.find({name: search})
-        if(!product) return res.status(404).send({message: 'Product not found'})
-
-        return res.send({ message: 'Product found', product });
+        let { search } = req.body
+ 
+        // Realizar la búsqueda utilizando $regex -> busca cualquier coincidencia $options -> no importa si es mayus o minusc
+        let products = await Product.find({ name: { $regex: search, $options: 'i' } })
+ 
+        if (products.length === 0) {
+            return res.status(404).send({ message: 'Product not found' })
+        }
+       
+        return res.send({message: 'Products found', products})
     } catch (error) {
         console.error(error);
-        return res.status(500).send({ message: 'Error getting product' });
+        return res.status(500).send({ message: 'Error getting product' })
     }
 }
 

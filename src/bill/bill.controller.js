@@ -80,25 +80,38 @@ export const completarCompra = async (req, res) => {
         const doc = new PDFDocument();
         doc.pipe(fs.createWriteStream(pdfPath));
 
-        doc.fontSize(25).text('Facturas', { align: 'center' }).moveDown();
-        
+        doc.font('Helvetica-Bold').fontSize(25).text('Empresa Amazon', { align: 'center' }).moveDown();
+        doc.font('Helvetica-Bold').fontSize(25).text('Facturas', { align: 'center' }).moveDown()
+    
         for (const bill of bills) {
             const cart = await Cart.findById(bill.cart).populate('product');
             const total = bill.total;
 
+            doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke()
+            doc.moveDown()
             doc.fontSize(16).text(`Fecha: ${bill.date.toLocaleDateString()}`).moveDown();
             doc.fontSize(16).text(`ID del carrito: ${cart._id}`).moveDown();
-            doc.fontSize(16).text('Productos:');
-            const product = await Product.findById(cart.product);
-            doc.fontSize(14).text(`- ${product.name} (Cantidad: ${cart.amount}, Precio unitario: ${product.price})`);
-            doc.fontSize(16).text(`Total del producto: ${total}`).moveDown();
+            doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke()
+            doc.moveDown()
+            doc.fontSize(16).text('Productos:')
+            doc.moveDown()
+            const product = await Product.findById(cart.product)
+            doc.fontSize(14).text(`- ${product.name}`)
+            doc.moveDown()
+            doc.fontSize(14).text(`(Cantidad: ${cart.amount}`)
+            doc.moveDown()
+            doc.fontSize(14).text(`Precio unitario: Q.${product.price})`)
+            doc.moveDown()
+            doc.moveDown()
+            doc.moveTo(50, doc.y).lineTo(550, doc.y).stroke()
+            doc.moveDown()
+            doc.fontSize(16).text(`Total del producto: Q.${total}`).moveDown();
 
-            doc.moveDown();
-            doc.addPage();
+            doc.moveDown()
         }
 
         // Mostramos el total a pagar en el documento
-        doc.fontSize(16).text(`Total a pagar: ${totalAPagar}`).moveDown();
+        doc.fontSize(16).text(`Total a pagar: Q.${totalAPagar}`).moveDown();
 
         doc.end();
 
